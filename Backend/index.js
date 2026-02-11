@@ -17,6 +17,19 @@ app.get('/call', (req,res) => {
     res.status(200).json({ message: 'Call data  created', call: call});
 })
 
+app.delete('/call/:index', (req,res)=> {
+    const index = req.params.index;
+    delete call[ index ];
+    res.status(200).json({ message: 'Call data deleted successfully!' });
+})
+
+app.patch('/call/:index', (req,res) => {
+    const index = req.params.index;
+    const phone = req.body.phone;
+    call[ index ].phone = phone;
+    res.status(200).json({ message: 'Call data updated successfully!' });
+})
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
