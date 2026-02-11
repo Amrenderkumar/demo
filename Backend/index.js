@@ -6,6 +6,8 @@ const app  = express();
 const call = [];
 
 app.use(express.json());
+
+
 app.post('/call', (req,res) => {
     call.push(req.body);
     res.status(201).json({ message: 'Call data received successfully!' });
