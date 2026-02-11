@@ -1,11 +1,19 @@
 import express from 'express';
-import userRoutes from './routes/user.route.js';
+
 
 const app  = express();
-app.use(express.json());
 
-// Import routes
-app.use('/api/users', userRoutes);
+const call = [];
+
+app.use(express.json());
+app.post('/call', (req,res) => {
+    call.push(req.body);
+    res.status(201).json({ message: 'Call data received successfully!' });
+})
+
+app.get('/call', (req,res) => {
+    res.status(200).json({ message: 'Call data  created', call: call});
+})
 
 const PORT = process.env.PORT || 5000;
 
