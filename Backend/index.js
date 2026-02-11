@@ -30,14 +30,30 @@ app.patch('/call/:index', (req,res) => {
     res.status(200).json({ message: 'Call data updated successfully!' });
 })
 
-const rani = [];
+// const rani = [];
 
-app.post('/rani', (req,res) => {
+// app.post('/rani', (req,res) => {
 
-    rani.push(req.body);
-    res.status(201).json({ message: 'Rani data received successfully!' });
-})
+//     rani.push(req.body);
+//     res.status(201).json({ message: 'Rani data received successfully!' });
+// })
 
+// app.get ('/rani', (req,res)=> {
+//     res.status(200).json({ message: 'Rani data created', rani: rani});
+// })
+
+// app.delete('/rani/:index',(req,res)=> {
+//     const index = req.params.index;
+//     delete rani[index ];
+//     res.status(200).json({ message: 'Rani data deleted successfully!' });
+// })
+
+// app.patch('/rani/:index', (req,res)=> {
+//     const index = req.params.index;
+//     const title = req.body.title;
+//     rani[index].title = title;
+//     res.status(200).json({ message: 'Rani data updated successfully!' });
+// })
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
