@@ -30,6 +30,14 @@ app.patch('/call/:index', (req,res) => {
     res.status(200).json({ message: 'Call data updated successfully!' });
 })
 
+const rani = [];
+
+app.post('/rani', (req,res) => {
+
+    rani.push(req.body);
+    res.status(201).json({ message: 'Rani data received successfully!' });
+})
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
