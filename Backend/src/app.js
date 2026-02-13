@@ -2,9 +2,40 @@ import express from 'express';
 
 const app  = express();
 
+
+
+export default app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const call = [];
-
-
 // app.post('/call', (req,res) => {
 //     call.push(req.body);
 //     res.status(201).json({ message: 'Call data received successfully!' });
@@ -52,4 +83,3 @@ const app  = express();
 //     res.status(200).json({ message: 'Rani data updated successfully!' });
 // })
 
-export default app;
