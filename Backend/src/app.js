@@ -1,19 +1,18 @@
 import express from 'express';
 import Notes from '../models/user.model.js';
 
-const app  = express();
+const app = express();
 
 
 app.use(express.json());
 
-app.post('/notes', async (req,res)=>{
+app.post('/notes', async (req, res) => {
     const data = req.body;
-    try {
-        const note = await Notes.create(data);
-        res.status(201).json({ message: 'Note created successfully!', note: note });
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to create note', error: error.message });
-    }
+   await Notes.create({
+        title: data.title,
+        description: data.description
+    });
+    res.status(201).json({ message: 'Notes created successfully!' });
 })
 
 export default app;
