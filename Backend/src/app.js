@@ -15,6 +15,11 @@ app.post('/notes', async (req, res) => {
     res.status(201).json({ message: 'Notes created successfully!' });
 })
 
+app.get('/notes', async (req, res) => {
+    const notes = await Notes.find();
+    res.status(200).json({ message: 'Notes retrieved successfully!', notes: notes });
+})
+
 export default app;
 
 
