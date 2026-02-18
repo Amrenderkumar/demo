@@ -22,7 +22,7 @@ app.get('/notes', async (req, res) => {
 
 app.delete('/notes/:id', async (req, res) => {
     const id = req.params.id;
-    await Notes.findByIdAndDelete(id);
+    await Notes.findOneAndDelete({ _id: id });  // Find the note by ID and delete it and the all of the a prticular id to delete the data.
     res.status(200).json({ message: 'Notes deleted successfully!' });
 }
 )
