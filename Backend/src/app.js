@@ -17,8 +17,15 @@ app.post('/notes', async (req, res) => {
 
 app.get('/notes', async (req, res) => {
     const notes = await Notes.find();
-    res.status(200).json({ message: 'Notes retrieved successfully!', notes: notes });
+    res.status(200).json({ message: 'Notes data created', notes: notes });
 })
+
+app.delete('/notes/:id', async (req, res) => {
+    const id = req.params.id;
+    await Notes.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Notes deleted successfully!' });
+}
+)
 
 export default app;
 
