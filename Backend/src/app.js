@@ -24,8 +24,15 @@ app.delete('/notes/:id', async (req, res) => {
     const id = req.params.id;
     await Notes.findOneAndDelete({ _id: id });  // Find the note by ID and delete it and the all of the a prticular id to delete the data.
     res.status(200).json({ message: 'Notes deleted successfully!' });
-}
-)
+})
+
+app.patch('/notes/:id', async (req, res) => {
+    const id = req.params.id;
+    const title = req.body.title;
+    await Notes.findOneAndUpdate({ _id: id }, { title: title });  // Find the note by ID and update the title of the note with the new title provided in the request body.
+    res.status(200).json({ message: 'Notes updated successfully!' });
+})
+
 
 export default app;
 
