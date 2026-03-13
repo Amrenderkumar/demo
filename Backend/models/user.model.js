@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const noteSchema = new mongoose.Schema({
-    title: {
+    image: {
         type: String,
-        required: true
     },
     description: {
         type: String,

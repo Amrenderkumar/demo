@@ -1,38 +1,48 @@
 import express from 'express';
 import Notes from '../models/user.model.js';
+import multer from 'multer';
+import cors from 'cors';
 
 const app = express();
 
 
+app.use(cors());
 app.use(express.json());
 
-app.post('/notes', async (req, res) => {
-    const data = req.body;
-   await Notes.create({
-        title: data.title,
-        description: data.description
-    });
-    res.status(201).json({ message: 'Notes created successfully!' });
-})
+const upload = multer({ storage: multer.memoryStorage() });
 
-app.get('/notes', async (req, res) => {
-    const notes = await Notes.find();
-    res.status(200).json({ message: 'Notes data created', notes: notes });
-})
 
-app.delete('/notes/:id', async (req, res) => {
-    const id = req.params.id;
-    await Notes.findOneAndDelete({ _id: id });  // Find the note by ID and delete it and the all of the a prticular id to delete the data.
-    res.status(200).json({ message: 'Notes deleted successfully!' });
-})
+app.post('/create-image', upload.single('image'), async (req, res) => {
+    console.log(req.file);
+    console.log(req.body);
+}
+)
+// app.post('/notes', async (req, res) => {
+//     const data = req.body;
+//    await Notes.create({
+//         title: data.title,
+//         description: data.description
+//     });
+//     res.status(201).json({ message: 'Notes created successfully!' });
+// })
 
-app.patch('/notes/:id', async (req, res) => {
-    const id = req.params.id;
-    const title = req.body.title;
-    await Notes.findOneAndUpdate({ _id: id }, { title: title });  // Find the note by ID and update the title of the note with the new title provided in the request body.
-    res.status(200).json({ message: 'Notes updated successfully!' });
-})
+// app.get('/notes', async (req, res) => {
+//     const notes = await Notes.find();
+//     res.status(200).json({ message: 'Notes data created', notes: notes });
+// })
 
+// app.delete('/notes/:id', async (req, res) => {
+//     const id = req.params.id;
+//     await Notes.findOneAndDelete({ _id: id });  // Find the note by ID and delete it and the all of the a prticular id to delete the data.
+//     res.status(200).json({ message: 'Notes deleted successfully!' });
+// })
+
+// app.patch('/notes/:id', async (req, res) => {
+//     const id = req.params.id;
+//     const title = req.body.title;
+//     await Notes.findOneAndUpdate({ _id: id }, { title: title });  // Find the note by ID and update the title of the note with the new title provided in the request body.
+//     res.status(200).json({ message: 'Notes updated successfully!' });
+// })
 
 export default app;
 
