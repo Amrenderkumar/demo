@@ -1,8 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
-import Notes from '../models/user.model.js';
 import multer from 'multer';
 import cors from 'cors';
-
+import uploadfile from '../services/storage.service.js';
 const app = express();
 
 
@@ -15,6 +17,13 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.post('/create-image', upload.single('image'), async (req, res) => {
     console.log(req.file);
     console.log(req.body);
+
+    const result = await uploadfile(req.file.buffer);
+
+     res.status(200).json({
+        message: "Image uploaded",
+        data: result
+    });
 }
 )
 // app.post('/notes', async (req, res) => {

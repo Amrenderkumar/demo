@@ -1,20 +1,16 @@
-const cloudinary = require('cloudinary').v2;
+import ImageKit from '@imagekit/nodejs';
 
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET
+const imagekit = new ImageKit({
+  privateKey: "private_CtFAaf2x0pIq9KeyhejMWiYFQ4Y=",
 });
 
-const uploadImage = async (imagePath) => {
-  try {
-    const result = await cloudinary.uploader.upload(imagePath);
-    console.log(result);
-    return result;
-  } catch (error) {
-    console.error('Error uploading image:', error);
-    throw error;
-  }
-};
+async function uploadImage(buffer) {
+  const result = await imagekit.files.upload({
+    file: buffer.toString('base64'),
+    fileName: 'image.jpg',
+  });
 
+  return result;
+}
+
+export default uploadImage;
