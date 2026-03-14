@@ -1,11 +1,9 @@
 // require a express server
+import dotenv from 'dotenv';
+dotenv.config();
 import app from './src/app.js';
 import connectDB from './database/db.js';
-import dotenv from 'dotenv';
 
-
-
-dotenv.config();
 connectDB();
 
 const PORT = process.env.PORT || 5000; 

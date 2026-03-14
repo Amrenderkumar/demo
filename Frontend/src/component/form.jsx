@@ -9,37 +9,17 @@ const form = () => {
   const [description, setDescription] = React.useState("");
   const [error, setError] = React.useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError("");
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!image) {
-      setError("Please select an image file.");
-      return;
-    }
-    if (!description.trim()) {
-      setError("Please enter a description.");
-      return;
-    }
+  const formdata = new FormData();
+  formdata.append("image", image);
+  formdata.append("description", description);
 
-    const formdata = new FormData();
-    formdata.append('image', image);
-    formdata.append('description', description.trim());
+  await axios.post("http://localhost:5001/create-image", formdata);
 
-    try {
-      const response = await axios.post("http://localhost:5001/create-image", formdata, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      });
-
-      console.log("Image uploaded successfully:", response.data);
-      navigate('/get-image');
-    } catch (uploadError) {
-      console.error("Error uploading image:", uploadError);
-      setError("Upload failed. Please try again.");
-    }
-  }
+  navigate("/get-image");
+};
 
   return (
     <section className='h-screen flex items-center justify-center bg-gray-50'>

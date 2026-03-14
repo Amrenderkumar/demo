@@ -8,6 +8,7 @@ const [posts, setPosts] = React.useState([]);
 React.useEffect(() => {
     axios.get("http://localhost:5001/get-image")
         .then(response => {
+             console.log("POSTS:", response.data.data);
             setPosts(response.data.data);
         })
         .catch(error => {
