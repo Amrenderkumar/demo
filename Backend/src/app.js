@@ -24,23 +24,25 @@ app.post('/create-image', upload.single('image'), async (req, res) => {
 
     const post = await postModel.create({
         image: result.url,
-        description: req.body.description,
-        imageUrl: result.url
+        description: req.body.description.trim()
     });
 
      res.status(200).json({
         message: "Image uploaded",
         data: post
     });
-})
+}
+)
 
 app.get('/get-image', async (req, res) => {
     const posts = await postModel.find();
     res.status(200).json({
-        message: "Image data",
+        message: "Image data created",
         data: posts
     });
-});
+}
+)
+
 // app.post('/notes', async (req, res) => {
 //     const data = req.body;
 //    await Notes.create({

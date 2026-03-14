@@ -1,16 +1,15 @@
 import React from 'react'
-import Header from './component/header'
+import Form from './component/form'
+import Feed from './component/feed'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 const App = () => {
   return (
     <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<Header />} />
-          <Route path="/about" element={<h1>About</h1>} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Form />} />
+        <Route path="/get-image" element={<Feed />} />
+      </Routes>
     </Router>
   )
 }
