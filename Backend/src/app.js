@@ -5,6 +5,7 @@ import express from 'express';
 import multer from 'multer';
 import cors from 'cors';
 import uploadfile from '../services/storage.service.js';
+import postModel from '../models/user.model.js';
 const app = express();
 
 
@@ -20,12 +21,26 @@ app.post('/create-image', upload.single('image'), async (req, res) => {
 
     const result = await uploadfile(req.file.buffer);
 
+
+    const post = await postModel.create({
+        image: result.url,
+        description: req.body.description,
+        imageUrl: result.url
+    });
+
      res.status(200).json({
         message: "Image uploaded",
-        data: result
+        data: post
     });
-}
-)
+})
+
+app.get('/get-image', async (req, res) => {
+    const posts = await postModel.find();
+    res.status(200).json({
+        message: "Image data",
+        data: posts
+    });
+});
 // app.post('/notes', async (req, res) => {
 //     const data = req.body;
 //    await Notes.create({
